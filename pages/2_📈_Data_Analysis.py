@@ -23,7 +23,9 @@ Dans cette partie, il est essentiel de garder à l'esprit l'objectif final du pr
 st.divider()
 st.header('Chargez les données nettoyées')
 st.markdown("""
-Nous chargeons d'abord les données nettoyées, puis nous examinons les distributions des différentes colonnes de données.""")
+Nous chargeons d'abord les données nettoyées, puis nous examinons les distributions des différentes colonnes de données.
+
+Observer tranquillement chacune des variables disponibles.""")
 
 
 @st.cache_data
@@ -107,6 +109,10 @@ elif variable_to_check != 'None':
 st.markdown("""
 **Questions**:
 - Que constatez-vous à partir de ces différents graphes ?
+- Voyez-vous une forme de saisonnalité dans les ventes ?
+- Quel est l'article le plus vendu ?
+- Combien de pièces d'un même article sont généralement achetées ensemble ?
+- Dans quelle fourchette de prix se trouve l'article le plus vendu ?
 - Quelle variable aura de l'influence sur le chiffre d'affaires ?
 - Y a-t-il d'autres graphes que vous souhaiteriez voir ?
     """)
@@ -171,6 +177,7 @@ st.divider()
 st.markdown("""
     **Félicitations!**
     Vous avez maintenant une bonne intution sur vos données et les schémas sous jacents . Il est temps de passer à la **prédiction** !
+    
     """)
 
 if st.button('Aller vers 🤖 Forecasting', type='primary', use_container_width=True):

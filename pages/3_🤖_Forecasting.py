@@ -80,7 +80,7 @@ perc_training = st.slider(
     "Pourcentage des données d'entrainement", 0, 100, 50)
 split_methodo = st.selectbox(
     "Méthodologie pour séparer les données:",
-    ['random', 'testing after training', 'testing before training'],
+    ['testing after training', 'testing before training', 'random'],
     label_visibility='visible',
 )
 
@@ -188,20 +188,29 @@ if st.button('Train model', type='primary', use_container_width=True):
         err_mae = mae(y_test, y_pred)
 
         st.markdown(f"""
-        Vos prédictions confrontées à la réalité enregistrent une erreur Mean Absolute Error (MAE): **{err_mae:.2f}**.
-        Cette erreur correspond à la somme de la valeur absolue des différences entre la valeur prédite et la réalité.
+        Vos prédictions confrontées à la réalité enregistrent une erreur MAE: **{err_mae:.2f}**.
 
-       Cela signigie qu'en moyenne, vous réalisez une erreur d'environ {err_mae:.0f} € par jour (en positif ou en négatif). 
+        Cela signigie qu'en moyenne, vous réalisez une erreur d'environ {err_mae:.0f} € par jour (en positif ou en négatif).""")
+
+        with st.expander("En savoir plus sur la MAE"):
+            st.markdown("""
+            Mean Absolute Error:            
+            Cette erreur correspond à la somme de la valeur absolue des différences entre la valeur prédite et la réalité.
+                        """)
+
+        st.markdown("""    
 
        L'étape suivante consiste à répondre à certaines des questions suivantes et à revenir au début de cette page pour améliorer les performances du modèle :
         - Êtes-vous satisfait de vos résultats ? 
         - Pouvez-vous expliquer pourquoi vous avez obtenu ces résultats ? 
         - Avez-vous des idées pour améliorer le modèle ? 
+
+        **Défi:** Notez votre score, changez les paramètres et trouvez un meilleure modèle que vos collègues!
         """)
 
 with st.expander("Astuce"):
     st.markdown("""
-Vous souhaitez en savoir plus sur un des modèles ? N'hésitez pas à consulter ChatGPT ou Wikipédia qui est une source riche sur le sujet.
+Vous souhaitez en savoir plus sur un des modèles ? N'hésitez pas à consulter Chat GPT ou Wikipédia qui est une source riche sur le sujet.
 """)
 
 st.divider()

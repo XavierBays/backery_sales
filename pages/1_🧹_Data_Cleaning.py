@@ -21,7 +21,24 @@ Dans cette première partie, vous commencerez à travailler avec un nouveau jeu 
 1. Charger l'ensemble de données
 2. Nettoyer les données pour conserver les colonnes intéressantes
 3. Détecter les problèmes dans l'ensemble de données et les résoudre
+
+Avant decharger les données disponibles, il est judicieux de réfléchir à la problématique et aux données nécessaires.
+
+**Questions:**
+- Avez-vous bien compris ce que vous cherchez à prédire ?
+- Quelles données pensez-vous nécessaires pour répondre à cette problématique ?
 """)
+
+with st.expander("Astuce"):
+    st.markdown("""
+    Prédire les ventes peut-être interprété de différentes manières. Cette problématiques n'est pas bien définie.
+    - Cherche-t-on à prédire le chiffre d'affaire ?
+    - Souhaite-t-on prédire la quantité de produits vendus ?
+    - Par panier d'achat ou en absolu ? ou alors, par type d'article ?
+    - ...
+
+    Pour la suite, nous allons viser la prédiction du chiffre d'affaire.
+    """)
 
 st.divider()
 st.header('Chargez les données')
@@ -53,22 +70,8 @@ Il est essentiel de commencer par observer vos données. Répondez aux **questio
 - Combien y a-t-il de lignes ?
 - Manque-t-il des données ?
 - Pensiez-vous avoir plus d'information ?
-
-Il est aussi temps de réfléchir à la problématique !
-- Avez-vous bien compris ce que vous cherchez à prédire ?
 - Quelle est la variable à prédire (variable réponse) ?
 """)
-
-with st.expander("Astuce"):
-    st.markdown("""
-    Prédire les ventes peut-être interprété de différentes manières. Cette problématiques n'est pas bien définie.
-    - Cherche-t-on à prédire le chiffre d'affaire ?
-    - Souhaite-t-on prédire la quantité de produits vendus ?
-    - Par panier d'achat ou en absolu ? ou alors, par type d'article ?
-    - ...
-
-    Pour la suite, nous allons viser la prédiction du chiffre d'affaire.
-    """)
 
 st.divider()
 st.header('Préparez les données')
@@ -170,7 +173,9 @@ Y a-t-il des observations problématiques ? Essayez d'anticiper des erreurs pote
 Un bon réflex consiste généralement à vérifier les statistiques principales telles que la _moyenne_, le _minimum_, le _maximum_, etc.
 
 La table ci-dessous vous présente pour trois colonnes les statistiques suivantes:
-le nombre d'observations, la moyenne, la déviation standard, le miniumum, le quantile 25, la médiane, le quantile 75, le maximum.""")
+le nombre d'observations, la moyenne, la déviation standard, le miniumum, le quantile 25, la médiane, le quantile 75, le maximum.
+
+Remarque: dans la tableau ci-dessous la séparation entre milliers et centaines est représentée par la virgule.""")
 
 st.dataframe(df.describe(), use_container_width=True)
 
@@ -226,14 +231,19 @@ st.markdown("""
 - Quelle est votre hypothèse ?
 - Comment peut-on résoudre ce problème ?""")
 
+with st.expander("Réponse:"):
+    st.markdown("""
+    Vous l'aurez constaté, lorsqu'on trouve une vente avec une quantité négative, il existe une vente similaire avec une quantité positive juste avant.
+    L'hypothèse de l'erreur de caisse semble s'avérérer. Il faudrait évidemment vérifier cela avec une personne de la boulangerie.
+
+    Pour résoudre ce problème, nous devons donc annuler les deux ventes la positive et la négative.""")
+
 st.markdown("""
-Vous l'aurez constaté, lorsqu'on trouve une vente avec une quantité négative, il existe une vente similaire avec une quantité positive juste avant.
-L'hypothèse de l'erreur de caisse semble s'avérérer. Il faudrait évidemment vérifier cela avec une personne de la boulangerie.
-
-Pour résoudre ce problème, nous devons donc annuler les deux ventes la positive et la négative.
-
 **Question**:
-- En quoi garder ces deux ventes pourrait-il poser problème pour l'analyse ? La somme de l'opération est finalement nulle...""")
+- En quoi garder ces deux ventes pourrait-il poser problème pour l'analyse ? La somme de l'opération est finalement nulle...
+
+
+Appliquons maintenant le nettoyage des données.""")
 
 
 @st.cache_data
@@ -327,6 +337,9 @@ with st.expander("Réponse:"):
     Supprimons donc ces données et affichons les statistiques une dernière fois.
     """)
 
+st.markdown("""
+Voici une dernière fois nos statistiques de base:
+    """)
 
 df = df[df.unit_price > 0]
 
@@ -337,7 +350,12 @@ st.dataframe(df.describe(), use_container_width=True)
 
 st.markdown("""
 **Félicitations!**
-Le jeu de données est maintenant nettoyé de ses imprécisions. Vous pouvez démarrer dans l'analyse des données!
+Le jeu de données est maintenant nettoyé de ses imprécisions.
+
+En bonus, vous avez gagné en maturtié sur ces données. Vous savez dorénavant les données disponibles, leurs valeurs attendues, ...
+
+
+Vous pouvez démarrer dans l'analyse des données!
 """)
 
 if st.button('Aller vers 📈 Data Analysis', type='primary', use_container_width=True):
